@@ -14,6 +14,7 @@ const BuyActionWindow = ({ uid }) => {
   const handleBuyClick = () => {
     axios.post("http://localhost:3002/newOrder", {
       name: uid,
+      user: localStorage.getItem("user"),
       qty: stockQuantity,
       price: stockPrice,
       mode: "BUY",

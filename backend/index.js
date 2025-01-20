@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
+const authRoutes = require('./auth');
+
 const {HoldingModel} = require('./model/HoldingsModel');
 const { PositionsModel } = require("./model/PositionsModel");
 
@@ -20,6 +22,7 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/api/auth', authRoutes);
 
 
 // app.get('/addHoldings', async (req, res) => {
@@ -213,10 +216,9 @@ app.post('/newOrder', async(req,res)=>{
     });
 
     newOrder.save();
-
+    let newholding = await HoldingModel.findOneAndUpdate()
     res.send("Order saved");
 });
-
 app.listen(PORT, () => {
     console.log("app started");
     mongoose.connect(uri);

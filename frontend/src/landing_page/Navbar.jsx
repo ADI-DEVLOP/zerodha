@@ -9,7 +9,7 @@ function Navbar() {
     >
       <div class="container p-2">
         <Link class="navbar-brand" to="/">
-          
+        <img src="media/Bulllogo.jpg" style={{ width: "25%" }} alt="logo" /> 
         </Link>
         <button
           class="navbar-toggler"
@@ -52,6 +52,11 @@ function Navbar() {
               <li class="nav-item">
                 <Link class="nav-link active" aria-current="page" to="/support">
                   Support
+                </Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link active" aria-current="page" to="/signin">
+                  Signin
                 </Link>
               </li>
             </ul>

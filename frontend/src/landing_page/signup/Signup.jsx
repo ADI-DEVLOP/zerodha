@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +17,7 @@ const SignUp = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     // Basic validation
@@ -24,12 +25,23 @@ const SignUp = () => {
       setError('All fields are required.');
       return;
     }
+    try {
+      const res = await axios.post('http://localhost:3002/api/auth/signup',{
+        ...formData
+      })
+      if (res){
+        setError('');
+        localStorage.setItem("user",formData.username);
+        alert('Sign Up Successful!');
+        window.location.href = "http://localhost:5173";
+
+      }
+    } catch (error) {
+      console.log(error)
+    }
 
     // Simulate an API call
     console.log('Form Submitted', formData);
-    setError('');
-    alert('Sign Up Successful!');
-    navigate('/dashboard'); // Redirect to the welcome page
   };
 
   return (
